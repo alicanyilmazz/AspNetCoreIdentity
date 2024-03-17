@@ -1,23 +1,44 @@
 ﻿
 @{
     ViewData["Title"] = "SignUp";
+    Layout = "~/Views/Shared/_LayoutAuthentication.cshtml";
 }
 @model SignUpViewModel
 
-
-<form>
-    <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+<div class="container wrapper">
+    <div class="">
+        <div class="offset-2 col-md-8 offset-2">
+            <h2 class="FormHeader">Sign Up</h2>
+            <form>
+                <div class="mb-3">
+                    <label for="UserName" class="form-label" asp-for="UserName"></label>
+                    <input asp-for="UserName" class="form-control" id="UserName" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="Email" class="form-label" asp-for="Email"></label>
+                    <input asp-for="Email" class="form-control" id="Email" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="Phone" class="form-label" asp-for="Phone"></label>
+                    <input asp-for="Phone" class="form-control" id="Phone" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Password" for="Password" class="form-label"></label>
+                    <input asp-for="Password" class="form-control" id="Password">
+                </div>
+                <div class="mb-3">
+                    <label asp-for="PasswordConfirm" for="PasswordConfirm" class="form-label"></label>
+                    <input asp-for="PasswordConfirm" class="form-control" id="PasswordConfirm">
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
     </div>
-    <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
-    </div>
-    <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+</div>
