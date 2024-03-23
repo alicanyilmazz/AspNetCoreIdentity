@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AspNetCoreIdentityApp.Web.ViewModels
+namespace AspNetCoreIdentityApp.Web.Areas.Authentication.ViewModels
 {
     public class SignUpViewModel
     {
-        [Required(ErrorMessage ="User name can not be empty!")]
+        [Required(ErrorMessage = "User name can not be empty!")]
         [Display(Name = "User Name")]
         public string? UserName { get; set; }
 
@@ -27,10 +27,10 @@ namespace AspNetCoreIdentityApp.Web.ViewModels
         [Compare(nameof(Password), ErrorMessage = "Password and password confirm do not match!")]
         [Required(ErrorMessage = "Password confirm can not be empty!")]
         [Display(Name = "Password Confirm")]
-        public string?  PasswordConfirm { get; set; }
+        public string? PasswordConfirm { get; set; }
         public SignUpViewModel()
         {
-                
+
         }
         public SignUpViewModel(string? userName, string? email, string? phone, string? password, string? passwordConfirm)
         {

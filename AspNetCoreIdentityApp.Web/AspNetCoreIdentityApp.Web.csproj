@@ -18,10 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Login\Controllers\" />
-    <Folder Include="Areas\Login\Data\" />
-    <Folder Include="Areas\Login\Models\" />
-    <Folder Include="Areas\Login\Views\" />
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Authentication\Data\" />
+    <Folder Include="Areas\Authentication\Models\" />
+    <Folder Include="ViewModels\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
