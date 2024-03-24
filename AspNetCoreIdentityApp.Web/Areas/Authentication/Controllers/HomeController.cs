@@ -1,5 +1,6 @@
-﻿using AspNetCoreIdentityApp.Web.Areas.Authentication.ViewModels;
-using AspNetCoreIdentityApp.Web.Models;
+﻿using AspNetCoreIdentityApp.Core.Entities;
+using AspNetCoreIdentityApp.Core.Services;
+using AspNetCoreIdentityApp.Web.Areas.Authentication.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,12 +10,12 @@ namespace AspNetCoreIdentityApp.Web.Areas.Authentication.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly UserManager<AppUser> _userManager;
+        private readonly IMemberService _memberService;
 
-        public HomeController(ILogger<HomeController> logger, UserManager<AppUser> userManager)
+        public HomeController(ILogger<HomeController> logger, IMemberService memberService)
         {
             _logger = logger;
-            _userManager = userManager;
+            _memberService = memberService;
         }
         public IActionResult Index()
         {
@@ -34,7 +35,7 @@ namespace AspNetCoreIdentityApp.Web.Areas.Authentication.Controllers
             {
                 return View();
             }
-            var identityResult = await _userManager.CreateAsync(
+            var identityResult = await _memberService.CreateAsync(
             new AppUser
             {
                 UserName = request.UserName,
