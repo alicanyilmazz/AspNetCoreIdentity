@@ -1,24 +1,15 @@
-using AspNetCoreIdentityApp.Core.Entities;
-using AspNetCoreIdentityApp.Core.Repositories;
-using AspNetCoreIdentityApp.Core.Services;
-using AspNetCoreIdentityApp.Core.UnitOfWork;
-using AspNetCoreIdentityApp.Data.Context;
-using AspNetCoreIdentityApp.Data.Repositories;
-using AspNetCoreIdentityApp.Data.UnitOfWork;
-using AspNetCoreIdentityApp.Service.Services;
+using AspNetCoreIdentityApp.Core.DependencyInjection;
 using AspNetCoreIdentityApp.Shared.Extensions.Exception;
 using AspNetCoreIdentityApp.Shared.Extensions.Validation;
-using AspNetCoreIdentityApp.Web.Configuration.DependencyInjection;
-using AspNetCoreIdentityApp.Web.Models;
-using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
 builder.Services.AddControllersWithViews();
 builder.Services.UseCustomValidationResponse();
-builder.Services.InstallServices(builder.Configuration,typeof(IServiceInstaller).Assembly);
+builder.Services.InstallServices(builder.Configuration,AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 

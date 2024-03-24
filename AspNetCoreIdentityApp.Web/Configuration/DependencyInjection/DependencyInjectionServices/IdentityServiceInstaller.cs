@@ -1,4 +1,5 @@
 ﻿
+using AspNetCoreIdentityApp.Core.DependencyInjection;
 using AspNetCoreIdentityApp.Core.Entities;
 using AspNetCoreIdentityApp.Data.Context;
 

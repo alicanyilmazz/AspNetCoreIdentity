@@ -1,4 +1,5 @@
 ﻿
+using AspNetCoreIdentityApp.Core.DependencyInjection;
 using AspNetCoreIdentityApp.Core.Repositories;
 using AspNetCoreIdentityApp.Core.Services;
 using AspNetCoreIdentityApp.Core.UnitOfWork;

@@ -1,10 +1,17 @@
-﻿using System.Reflection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace AspNetCoreIdentityApp.Web.Configuration.DependencyInjection
+namespace AspNetCoreIdentityApp.Core.DependencyInjection
 {
-    public static class DependencyInjection
+    public static class DependencyInjectionManager
     {
-        public static IServiceCollection InstallServices(this IServiceCollection services,IConfiguration configuration,params Assembly[] assemblies)
+        public static IServiceCollection InstallServices(this IServiceCollection services, IConfiguration configuration, params Assembly[] assemblies)
         {
             static bool IsAssignableToType<T>(TypeInfo typeInfo) => typeof(T).IsAssignableFrom(typeInfo) && !typeInfo.IsInterface && !typeInfo.IsAbstract;
 
@@ -19,8 +26,6 @@ namespace AspNetCoreIdentityApp.Web.Configuration.DependencyInjection
             }
 
             return services;
-
-      
         }
     }
 }
