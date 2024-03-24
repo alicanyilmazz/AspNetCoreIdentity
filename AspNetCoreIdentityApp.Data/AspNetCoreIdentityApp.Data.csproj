@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Configurations\EntityConfigurations\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AspNetCoreIdentityApp.Core\AspNetCoreIdentityApp.Core.csproj" />
+  </ItemGroup>
+
 </Project>
