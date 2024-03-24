@@ -26,4 +26,8 @@
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AspNetCoreIdentityApp.Service\AspNetCoreIdentityApp.Service.csproj" />
+  </ItemGroup>
+
 </Project>
