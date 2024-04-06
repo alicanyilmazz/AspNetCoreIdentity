@@ -1,6 +1,9 @@
 ﻿using AspNetCoreIdentityApp.Core.Entities;
 using AspNetCoreIdentityApp.Core.Services;
+using AspNetCoreIdentityApp.Core.ViewModels.Areas.Admin;
+using AspNetCoreIdentityApp.Service.DtoMappers;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +21,14 @@ namespace AspNetCoreIdentityApp.Service.Services
             _userManager = userManager;
         }
 
-        public Task<IdentityResult> CreateAsync(AppUser user, string password)
+        public async Task<IdentityResult> CreateAsync(AppUser user, string password)
         {
-             return _userManager.CreateAsync(user,password);
+             return await _userManager.CreateAsync(user,password);
+        }
+
+        public async Task<IEnumerable<UserViewModel>> GetUsersAsync()
+        {
+            return ObjectMapper.Mapper.Map<IEnumerable<UserViewModel>>(await _userManager.Users.ToListAsync());
         }
     }
 }

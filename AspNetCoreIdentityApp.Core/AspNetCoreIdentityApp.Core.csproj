@@ -25,4 +25,9 @@
     <ProjectReference Include="..\AspNetCoreIdentityApp.Shared\AspNetCoreIdentityApp.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="Dtos\" />
+  </ItemGroup>
+
 </Project>
