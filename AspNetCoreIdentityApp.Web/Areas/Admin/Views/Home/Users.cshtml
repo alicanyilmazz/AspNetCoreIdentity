@@ -5,9 +5,9 @@
 
 <h1>Users</h1>
 
-<table class="table table-hover">
+<table id="userlist" class="table table-hover">
     <thead>
-        <tr>
+        <tr class="table-danger">
             <th scope="col">Id</th>
             <th scope="col">User Name</th>
             <th scope="col">Email</th>
@@ -16,7 +16,7 @@
     <tbody>
         @foreach (var user in Model)
         {
-            <tr class="table-active">
+            <tr class="table-success">
                 <td>@user.Id</td>
                 <td>@user.UserName</td>
                 <td>@user.Email</td>
@@ -24,3 +24,25 @@
         }
     </tbody>
 </table>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var tableRows = document.querySelectorAll("#userlist tbody tr");
+
+        var classes = [
+            "table-primary",
+            "table-secondary",
+            "table-success",
+            "table-danger",
+            "table-warning",
+            "table-info",
+            "table-light",
+            "table-dark"
+        ];
+
+        tableRows.forEach(function (row) {
+            var randomClass = classes[Math.floor(Math.random() * classes.length)];
+            row.classList.add(randomClass);
+        });
+    });
+</script>
