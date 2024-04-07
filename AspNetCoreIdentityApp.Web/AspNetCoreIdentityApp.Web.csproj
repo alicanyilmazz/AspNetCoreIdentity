@@ -23,7 +23,6 @@
     <Folder Include="Areas\Authentication\Data\" />
     <Folder Include="Areas\Authentication\Models\" />
     <Folder Include="ViewModels\" />
-    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
   <ItemGroup>
