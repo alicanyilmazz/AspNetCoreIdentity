@@ -15,6 +15,8 @@ namespace AspNetCoreIdentityApp.Web.Configuration.DependencyInjection.Dependency
         {
             services.AddScoped(typeof(IService<,>), typeof(Service<,>));
             services.AddScoped(typeof(IMemberService), typeof(MemberService));
+            services.AddScoped(typeof(IEntityRepository<>), typeof(EntityRepository<>));
+            services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
         }
     }
 }
