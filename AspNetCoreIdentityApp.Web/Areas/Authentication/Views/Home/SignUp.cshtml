@@ -4,11 +4,15 @@
     Layout = "~/Areas/Authentication/Views/Shared/_LayoutAuthentication.cshtml";
 }
 @model SignUpViewModel
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
 
-<div class="d-flex align-items-center">
-    <div class="container" style="margin-top:5%;">
-        <div class="offset-2 col-md-8 offset-2" style="padding-top:5%;padding-bottom:3%;">
-            <h1 class="FormHeader">Sign Up</h1>
+
+<div class="container">
+    <div class="card" style="margin-top:5%;">
+        <h3 class="card-header">SignUp</h3>
+        <div class="card-body">
             @if (@TempData["SuccessMessage"] is not null)
             {
                 <div class="alert alert-dismissible alert-success">
@@ -68,8 +72,23 @@
                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
                     <label class="form-check-label" for="exampleCheck1">Check me out</label>
                 </div>
-                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-arrow-right-to-bracket"></i></button>
+                <div class="row">
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-arrow-right-to-bracket"></i> Sign Up </button>
+               </div>
             </form>
+        </div>
+        <div class="card-footer text-muted">
+            <div class="d-flex justify-content-center">
+                <div>
+                    <i class="fa-brands fa-facebook-f"></i>
+                </div>
+                <div>
+                    <i class="fa-brands fa-twitter"></i>
+                </div>
+                <div>
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </div>
+            </div>
         </div>
     </div>
 </div>
