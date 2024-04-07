@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using AspNetCoreIdentityApp.Core.Entities;
+using AspNetCoreIdentityApp.Core.ViewModels.Areas.Admin;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +13,7 @@ namespace AspNetCoreIdentityApp.Service.DtoMappers
     {
         public DtoMapper()
         {
-            //CreateMap<Product, ProductDto>().ReverseMap();
+            CreateMap<AppUser, UserViewModel>().ReverseMap();
         }
     }
 }
