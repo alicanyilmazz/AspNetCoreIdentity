@@ -10,7 +10,11 @@ namespace AspNetCoreIdentityApp.Web.Configuration.DependencyInjection.Dependency
     {
         public void Install(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddIdentity<AppUser, AppRole>(IdentitySettings.ConfigureIdentitySettings()).AddPasswordValidator<PasswordValidator>().AddUserValidator<UserValidator>().AddEntityFrameworkStores<AppDbContext>();
+            services.AddIdentity<AppUser, AppRole>(IdentitySettings.ConfigureIdentitySettings())
+                .AddPasswordValidator<PasswordValidator>()
+                .AddUserValidator<UserValidator>()
+                .AddErrorDescriber<LocalizationIdentityErrorDescriber>()
+                .AddEntityFrameworkStores<AppDbContext>();
         }     
     }
 }
