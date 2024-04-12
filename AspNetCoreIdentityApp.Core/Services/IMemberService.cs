@@ -12,7 +12,8 @@ namespace AspNetCoreIdentityApp.Core.Services
 {
     public interface IMemberService
     {
-        public Task<IdentityResult> CreateAsync(AppUser user,string password);
+        public Task<IdentityResult> SignUpAsync(AppUser user, string password);
+        public Task<IdentityResult> SignInAsync(string email, string password, bool rememberMe);
         public Task<IEnumerable<UserViewModel>> GetUsersAsync();
     }
 }
