@@ -21,9 +21,9 @@ namespace AspNetCoreIdentityApp.Core.Frameworks.Identity
             {
                 errors.Add(new IdentityError() { Code = "UserNameContainAdmin", Description = "Username can not contain admin" });
             }
-            if (user.Email!.EndsWith(".com"))
+            if (user.Email!.StartsWith(".com"))
             {
-                errors.Add(new IdentityError() { Code = "EmailEndsWithCom", Description = "Email can not end with .com" });
+                errors.Add(new IdentityError() { Code = "EmailStartsWithCom", Description = "Email can not start with .com" });
             }
             if (errors.Any())
             {
