@@ -1,5 +1,4 @@
-﻿@using AspNetCoreIdentityApp.Web.Areas.Authentication.ViewModels
-@{
+﻿@{
     ViewData["Title"] = "SignUp";
     Layout = "~/Areas/Authentication/Views/Shared/_LayoutAuthentication.cshtml";
 }
@@ -68,10 +67,6 @@
 
                     <span class="text-danger" asp-validation-for="PasswordConfirm" style="margin-left:5%;"></span>
                 </div>
-                <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                </div>
                 <div class="row">
                     <button type="submit" class="btn btn-primary"><i class="fa-solid fa-arrow-right-to-bracket"></i> Sign Up </button>
                </div>
@@ -79,7 +74,7 @@
         </div>
         <div class="card-footer text-muted">
             <div class="d-flex justify-content-center">
-                <div>
+              @*   <div>
                     <i class="fa-brands fa-facebook-f"></i>
                 </div>
                 <div>
@@ -87,7 +82,7 @@
                 </div>
                 <div>
                     <i class="fa-brands fa-linkedin-in"></i>
-                </div>
+                </div> *@
             </div>
         </div>
     </div>
