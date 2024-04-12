@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "SignIn";
+    Layout = "~/Areas/Authentication/Views/Shared/_LayoutAuthentication.cshtml";
+}
+
+@model SignInViewModel
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+
+<div class="container">
+    <div class="card" style="margin-top:5%;">
+        <h3 class="card-header">SignIn</h3>
+        <div class="card-body">
+            <div asp-validation-summary=ModelOnly class="alert alert-dismissible alert-danger">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <i class="fa-regular fa-circle-check" style="margin-right:10px;"></i>
+            </div>
+            <form asp-controller="Home" asp-action="SignIn" method="post">
+                <label for="Email" class="form-label" asp-for="Email"></label>
+                <div class="mb-1 ">
+                    <div class="d-flex align-items-center">
+                        <i class="fa-regular fa-envelope" style="margin-right:10px;"></i>
+                        <input asp-for="Email" class="form-control" for="Email" aria-describedby="EmailError" placeholder="Email">
+                    </div>
+                    <span class="text-danger" asp-validation-for="Email" style="margin-left:5%;"></span>
+                </div>
+                <label asp-for="Password" for="Password" class="form-label"></label>
+                <div class="mb-1 ">
+                    <div class="d-flex align-items-center">
+                        <i class="fa-solid fa-lock" style="margin-right:10px;"></i>
+                        <input asp-for="Password" class="form-control" for="Password" placeholder="Password">
+                    </div>
+                    <span class="text-danger" asp-validation-for="Password" style="margin-left:5%;"></span>
+                </div>
+                <div class="mb-3 form-check">
+                    <input asp-for="RememberMe" class="form-check-input">
+                    <label class="form-check-label" for="RememberMe">Remember Me</label>
+                </div>
+                <div class="row">
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In </button>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer text-muted">
+            <div class="d-flex justify-content-center">
+              @*   <div>
+                    <i class="fa-brands fa-facebook-f"></i>
+                </div>
+                <div>
+                    <i class="fa-brands fa-twitter"></i>
+                </div>
+                <div>
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </div> *@
+            </div>
+        </div>
+    </div>
+</div>
+
