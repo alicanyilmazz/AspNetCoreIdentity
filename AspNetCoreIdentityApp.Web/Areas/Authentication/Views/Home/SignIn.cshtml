@@ -1,6 +1,6 @@
 ﻿@{
     ViewData["Title"] = "SignIn";
-    Layout = "~/Areas/Authentication/Views/Shared/_LayoutAuthentication.cshtml";
+    Layout = "~/Areas/Authentication/Views/Shared/_Layout.cshtml";
 }
 
 @model SignInViewModel
@@ -17,7 +17,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 <i class="fa-regular fa-circle-check" style="margin-right:10px;"></i>
             </div>
-            <form asp-controller="Home" asp-action="SignIn" method="post">
+            <form asp-area="Authentication" asp-controller="Home" asp-action="SignIn" asp-route-returnUrl="@Context.Request.Query["returnURl"]" method="post">
                 <label for="Email" class="form-label" asp-for="Email"></label>
                 <div class="mb-1 ">
                     <div class="d-flex align-items-center">
@@ -45,15 +45,9 @@
         </div>
         <div class="card-footer text-muted">
             <div class="d-flex justify-content-center">
-              @*   <div>
-                    <i class="fa-brands fa-facebook-f"></i>
-                </div>
                 <div>
-                    <i class="fa-brands fa-twitter"></i>
+                    <a asp-area="Authentication" asp-controller="Home" asp-action="SignUp">Don't you have an account? Sign Up</a>
                 </div>
-                <div>
-                    <i class="fa-brands fa-linkedin-in"></i>
-                </div> *@
             </div>
         </div>
     </div>
