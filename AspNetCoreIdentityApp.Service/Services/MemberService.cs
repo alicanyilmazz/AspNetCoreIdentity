@@ -25,10 +25,10 @@ namespace AspNetCoreIdentityApp.Service.Services
 
         public async Task<IdentityResult> SignUpAsync(AppUser user, string password)
         {
-             return await _userManager.CreateAsync(user,password);
+            return await _userManager.CreateAsync(user, password);
         }
 
-        public async Task<IdentityResult> SignInAsync(string email, string password,bool rememberMe)
+        public async Task<IdentityResult> SignInAsync(string email, string password, bool rememberMe)
         {
             var errors = new List<IdentityError>();
             var hasUser = await _userManager.FindByEmailAsync(email);
@@ -52,6 +52,10 @@ namespace AspNetCoreIdentityApp.Service.Services
             errors.Add(new IdentityError() { Code = "EmailOrPasswordWrong", Description = "Email or password wrong." });
             errors.Add(new IdentityError() { Code = "EmailOrPasswordWrongCount", Description = $"Unsuccessful entrance {accessFailedCount}." });
             return IdentityResult.Failed([.. errors]);
+        }
+        public async Task SignOutAsync()
+        {
+           await _signInManager.SignOutAsync();
         }
         public async Task<IEnumerable<UserViewModel>> GetUsersAsync()
         {
