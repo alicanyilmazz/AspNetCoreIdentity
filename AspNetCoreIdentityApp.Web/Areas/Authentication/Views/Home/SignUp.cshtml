@@ -1,6 +1,6 @@
 ﻿@{
     ViewData["Title"] = "SignUp";
-    Layout = "~/Areas/Authentication/Views/Shared/_LayoutAuthentication.cshtml";
+    Layout = "~/Areas/Authentication/Views/Shared/_Layout.cshtml";
 }
 @model SignUpViewModel
 @section Scripts{
@@ -74,15 +74,9 @@
         </div>
         <div class="card-footer text-muted">
             <div class="d-flex justify-content-center">
-              @*   <div>
-                    <i class="fa-brands fa-facebook-f"></i>
-                </div>
                 <div>
-                    <i class="fa-brands fa-twitter"></i>
+                    <a asp-area="Authentication" asp-controller="Home" asp-action="SignIn">Already have an account? Sign In</a>
                 </div>
-                <div>
-                    <i class="fa-brands fa-linkedin-in"></i>
-                </div> *@
             </div>
         </div>
     </div>
