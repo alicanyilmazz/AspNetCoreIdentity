@@ -67,7 +67,7 @@ namespace AspNetCoreIdentityApp.Web.Areas.Authentication.Controllers
                 return View();
             }
 
-            returnUrl = returnUrl ?? Url.Action("Index", "Home", new { area = "Admin" });
+            returnUrl = returnUrl ?? Url.Action("Index", "Home", new { area = "User" });
 
             var response = await _memberService.SignInAsync(request.Email, request.Password, request.RememberMe);
 
