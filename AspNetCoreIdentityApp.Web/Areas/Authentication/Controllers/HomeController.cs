@@ -48,7 +48,7 @@ namespace AspNetCoreIdentityApp.Web.Areas.Authentication.Controllers
                 TempData["SuccessMessage"] = "Registration was completed successfully.";
                 return RedirectToAction(nameof(HomeController.SignUp));
             }
-            ModelState.AddModelStateErrors(identityResult.Errors.Select(x=>x.Description).ToList());
+            ModelState.AddModelStateErrors(identityResult.Errors.Select(x => x.Description).ToList());
 
             return View();
         }
@@ -60,7 +60,7 @@ namespace AspNetCoreIdentityApp.Web.Areas.Authentication.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SignIn(SignInViewModel request,string? returnUrl=null)
+        public async Task<IActionResult> SignIn(SignInViewModel request, string? returnUrl = null)
         {
             if (!ModelState.IsValid)
             {
@@ -71,7 +71,7 @@ namespace AspNetCoreIdentityApp.Web.Areas.Authentication.Controllers
 
             var response = await _memberService.SignInAsync(request.Email, request.Password, request.RememberMe);
 
-            if (!response.Succeeded) 
+            if (!response.Succeeded)
             {
                 ModelState.AddModelStateErrors(response.Errors.Select(x => x.Description).ToList());
                 return View();
@@ -79,5 +79,12 @@ namespace AspNetCoreIdentityApp.Web.Areas.Authentication.Controllers
 
             return Redirect(returnUrl);
         }
+
+        [HttpGet]
+        public async Task SignOut()
+        {
+            await _memberService.SignOutAsync();
+        }
+
     }
 }
