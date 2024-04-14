@@ -1,3 +1,4 @@
+using AspNetCoreIdentityApp.Core.Configuration;
 using AspNetCoreIdentityApp.Core.DependencyInjection;
 using AspNetCoreIdentityApp.Shared.Extensions.Exception;
 using AspNetCoreIdentityApp.Shared.Extensions.Validation;
@@ -6,10 +7,10 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllersWithViews();
 builder.Services.UseCustomValidationResponse();
 builder.Services.InstallServices(builder.Configuration,AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.InstallConfigurations(builder.Configuration, AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
@@ -26,7 +27,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
