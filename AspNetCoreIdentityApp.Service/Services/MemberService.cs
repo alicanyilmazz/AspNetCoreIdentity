@@ -17,6 +17,7 @@ namespace AspNetCoreIdentityApp.Service.Services
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
 
+     
         public MemberService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _userManager = userManager;
@@ -71,6 +72,16 @@ namespace AspNetCoreIdentityApp.Service.Services
             }
             var resetToken = await _userManager.GeneratePasswordResetTokenAsync(hasUser);
             return (result: IdentityResult.Success, token: resetToken, userId: hasUser.Id);
+        }
+
+        public async Task<IdentityResult> ResetUserPassword(string userId, string token, string password)
+        {
+            var hasUser = await _userManager.FindByIdAsync(userId);
+            if (hasUser is null)
+            {
+                return IdentityResult.Failed(new IdentityError() { Code = "UserNotFound", Description = "No registered user was found with this email." });
+            }
+            return await _userManager.ResetPasswordAsync(hasUser, token, password);
         }
     }
 }
