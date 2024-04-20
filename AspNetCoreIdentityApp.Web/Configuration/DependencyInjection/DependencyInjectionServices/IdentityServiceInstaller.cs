@@ -2,6 +2,7 @@
 using AspNetCoreIdentityApp.Core.Entities;
 using AspNetCoreIdentityApp.Core.Frameworks.Identity;
 using AspNetCoreIdentityApp.Data.Context;
+using Microsoft.AspNetCore.Identity;
 
 
 namespace AspNetCoreIdentityApp.Web.Configuration.DependencyInjection.DependencyInjectionServices
@@ -14,7 +15,13 @@ namespace AspNetCoreIdentityApp.Web.Configuration.DependencyInjection.Dependency
                 .AddPasswordValidator<PasswordValidator>()
                 .AddUserValidator<UserValidator>()
                 .AddErrorDescriber<LocalizationIdentityErrorDescriber>()
+                .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<AppDbContext>();
+
+            services.Configure<DataProtectionTokenProviderOptions>(options =>
+            {
+                options.TokenLifespan = TimeSpan.FromHours(2);
+            });
         }     
     }
 }
