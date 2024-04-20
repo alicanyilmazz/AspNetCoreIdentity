@@ -22,6 +22,12 @@ namespace AspNetCoreIdentityApp.Web.Configuration.DependencyInjection.Dependency
             {
                 options.TokenLifespan = TimeSpan.FromHours(2);
             });
+
+            // Configure the security stamp validation interval
+            services.Configure<SecurityStampValidatorOptions>(options =>
+            {
+                options.ValidationInterval = TimeSpan.FromMinutes(30);
+            });
         }     
     }
 }
