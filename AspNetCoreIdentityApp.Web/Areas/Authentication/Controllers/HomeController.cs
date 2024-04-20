@@ -12,11 +12,13 @@ namespace AspNetCoreIdentityApp.Web.Areas.Authentication.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IMemberService _memberService;
+        private readonly IEmailService _emailService;
 
-        public HomeController(ILogger<HomeController> logger, IMemberService memberService)
+        public HomeController(ILogger<HomeController> logger, IMemberService memberService, IEmailService emailService)
         {
             _logger = logger;
             _memberService = memberService;
+            _emailService = emailService;
         }
         public IActionResult Index()
         {
@@ -86,5 +88,27 @@ namespace AspNetCoreIdentityApp.Web.Areas.Authentication.Controllers
             await _memberService.SignOutAsync();
         }
 
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel request)
+        {
+            var (result, token, userId) = await _memberService.ForgotUserPassword(request!.Email!);
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelStateErrors(result.Errors.Select(x => x.Description).ToList());
+                return View();
+            }
+            var resetPasswordUrl = Url.Action("ResetPassword", "Home", new { area = "Authentication", token, userId }, Request.Scheme);
+            await _emailService.SendPasswordResetEmail(resetPasswordUrl, request.Email);
+
+            TempData["SuccessMessage"] = $"Password reset link has been sent to your email address {request.Email}";
+
+            return RedirectToAction(nameof(ForgotPassword));
+        }
     }
 }
