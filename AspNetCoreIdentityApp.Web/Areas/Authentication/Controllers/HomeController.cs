@@ -97,18 +97,30 @@ namespace AspNetCoreIdentityApp.Web.Areas.Authentication.Controllers
         [HttpPost]
         public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel request)
         {
-            var (result, token, userId) = await _memberService.ForgotUserPassword(request!.Email!);
+            var (result, token, id) = await _memberService.ForgotUserPassword(request!.Email!);
             if (!result.Succeeded)
             {
                 ModelState.AddModelStateErrors(result.Errors.Select(x => x.Description).ToList());
                 return View();
             }
-            var resetPasswordUrl = Url.Action("ResetPassword", "Home", new { area = "Authentication", token, userId }, Request.Scheme);
+            var resetPasswordUrl = Url.Action("ResetPassword", "Home", new { area = "Authentication", Token = token, userId = id }, Request.Scheme);
             await _emailService.SendPasswordResetEmail(resetPasswordUrl, request.Email);
 
             TempData["SuccessMessage"] = $"Password reset link has been sent to your email address {request.Email}";
 
             return RedirectToAction(nameof(ForgotPassword));
+        }
+
+        [HttpGet]
+        public IActionResult ResetPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ResetPassword(string a)
+        {
+            return View();
         }
     }
 }
