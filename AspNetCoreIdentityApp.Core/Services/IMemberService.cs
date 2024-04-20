@@ -16,5 +16,6 @@ namespace AspNetCoreIdentityApp.Core.Services
         public Task<IdentityResult> SignInAsync(string email, string password, bool rememberMe);
         public Task SignOutAsync();
         public Task<IEnumerable<UserViewModel>> GetUsersAsync();
+        public Task<(IdentityResult result, string? token, string? userId)> ForgotUserPassword(string email);
     }
 }
