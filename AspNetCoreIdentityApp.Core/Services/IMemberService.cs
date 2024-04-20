@@ -17,5 +17,6 @@ namespace AspNetCoreIdentityApp.Core.Services
         public Task SignOutAsync();
         public Task<IEnumerable<UserViewModel>> GetUsersAsync();
         public Task<(IdentityResult result, string? token, string? userId)> ForgotUserPassword(string email);
+        public Task<IdentityResult> ResetUserPassword(string userId, string token, string password);
     }
 }
