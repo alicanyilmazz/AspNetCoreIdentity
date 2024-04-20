@@ -16,14 +16,12 @@
             {
                 <div class="alert alert-dismissible alert-success">
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    <i class="fa-regular fa-circle-check" style="margin-right:10px;"></i>
                     <strong>Well done!</strong> @TempData["SuccessMessage"] <a href="#" class="alert-link">you can return home page.</a>.
                 </div>
             }
 
             <div asp-validation-summary=ModelOnly class="alert alert-dismissible alert-danger">
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                <i class="fa-regular fa-circle-check" style="margin-right:10px;"></i>
             </div>
             <form asp-controller="Home" asp-action="SignUp" method="post">
                 <label for="UserName" class="form-label" asp-for="UserName"></label>
