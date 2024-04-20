@@ -112,14 +112,34 @@ namespace AspNetCoreIdentityApp.Web.Areas.Authentication.Controllers
         }
 
         [HttpGet]
-        public IActionResult ResetPassword()
+        public IActionResult ResetPassword(string userId , string token)
         {
+            TempData["userId"] = userId;
+            TempData["token"] = token;
+
             return View();
         }
 
         [HttpPost]
-        public IActionResult ResetPassword(string a)
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel request)
         {
+            var userId = TempData["userId"];
+            var token = TempData["token"];
+
+            if (userId is null || token is null)
+            {
+                throw new Exception("Opps an error occured.");
+            }
+
+            var result = await _memberService.ResetUserPassword(userId.ToString()!,token.ToString()!,request.Password!);
+
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelStateErrors(result.Errors.Select(x => x.Description).ToList());
+                return View();
+            }
+
+            TempData["SuccessMessage"] = $"Your password reseted successfully.";
             return View();
         }
     }
