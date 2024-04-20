@@ -55,11 +55,22 @@ namespace AspNetCoreIdentityApp.Service.Services
         }
         public async Task SignOutAsync()
         {
-           await _signInManager.SignOutAsync();
+            await _signInManager.SignOutAsync();
         }
         public async Task<IEnumerable<UserViewModel>> GetUsersAsync()
         {
             return ObjectMapper.Mapper.Map<IEnumerable<UserViewModel>>(await _userManager.Users.ToListAsync());
+        }
+
+        public async Task<(IdentityResult result, string? token, string? userId)> ForgotUserPassword(string email)
+        {
+            var hasUser = await _userManager.FindByEmailAsync(email);
+            if (hasUser is null)
+            {
+                return (result: IdentityResult.Failed(new IdentityError() { Code = "UserNotFound", Description = "No registered user was found with this email." }), token: null, userId: null);
+            }
+            var resetToken = await _userManager.GeneratePasswordResetTokenAsync(hasUser);
+            return (result: IdentityResult.Success, token: resetToken, userId: hasUser.Id);
         }
     }
 }
