@@ -62,6 +62,15 @@ namespace AspNetCoreIdentityApp.Service.Services
         {
             return ObjectMapper.Mapper.Map<IEnumerable<UserViewModel>>(await _userManager.Users.ToListAsync());
         }
+        public async Task<(AppUser? user, IdentityResult result)> GetUserByNameAsync(string userName)
+        {
+            AppUser? hasUser = await _userManager.FindByNameAsync(userName);
+            if (hasUser is null)
+            {
+                return (hasUser, IdentityResult.Failed(new IdentityError() { Code = "UserNotFound", Description = "No registered user was found with this user name." }));
+            }
+            return (hasUser,IdentityResult.Success);
+        }
 
         public async Task<(IdentityResult result, string? token, string? userId)> ForgotUserPassword(string email)
         {
