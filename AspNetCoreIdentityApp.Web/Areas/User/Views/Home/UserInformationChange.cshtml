@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewData["Title"] = "UserInformationChange";
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+}
+
+@model UserInformationChangeViewModel
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+
+<div class="container">
+    <div class="card" style="margin-top:5%;">
+        <h3 class="card-header">SignUp</h3>
+        <div class="card-body">
+            @if (@TempData["SuccessMessage"] is not null)
+            {
+                <div class="alert alert-dismissible alert-success">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <strong>Well done!</strong> @TempData["SuccessMessage"] <a href="#" class="alert-link">you can return home page.</a>.
+                </div>
+            }
+
+            <div asp-validation-summary=ModelOnly class="alert alert-dismissible alert-danger">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            <form asp-controller="Home" asp-action="UserInformationChange" method="post" enctype="multipart/form-data">
+                <label for="UserName" class="form-label" asp-for="UserName"></label>
+                <div class="">
+                    <div class="d-flex align-items-center">
+                        <i class="fa-regular fa-user" style="margin-right:10px;"> </i>
+                        <input asp-for="UserName" class="form-control" id="UserName" aria-describedby="UserNameError" placeholder="User Name">
+                    </div>
+                    <span class="text-danger" asp-validation-for="UserName" style="margin-left:5%;"></span>
+                </div>
+                <label for="Email" class="form-label" asp-for="Email"></label>
+                <div class="">
+                    <div class="d-flex align-items-center">
+                        <i class="fa-regular fa-envelope" style="margin-right:10px;"></i>
+                        <input asp-for="Email" class="form-control" id="Email" aria-describedby="EmailError" placeholder="Email">
+                    </div>
+                    <span class="text-danger" asp-validation-for="Email" style="margin-left:5%;"></span>
+                </div>
+                <label for="Phone" class="form-label" asp-for="Phone"></label>
+                <div class="">
+                    <div class=" d-flex align-items-center">
+                        <i class="fa-solid fa-mobile-screen-button" style="margin-right:10px;"></i>
+                        <input asp-for="Phone" class="form-control" id="Phone" aria-describedby="PhoneError" placeholder="Phone Number">
+                    </div>
+                    <span class="text-danger" asp-validation-for="Phone" style="margin-left:5%;"></span>
+                </div>
+                <label for="City" class="form-label" asp-for="City"></label>
+                <div class="">
+                    <div class=" d-flex align-items-center">
+                        <i class="fa-solid fa-mobile-screen-button" style="margin-right:10px;"></i>
+                        <input asp-for="City" class="form-control" id="City" aria-describedby="CityError" placeholder="City">
+                    </div>
+                    <span class="text-danger" asp-validation-for="City" style="margin-left:5%;"></span>
+                </div>
+                <label for="BirtDate" class="form-label" asp-for="BirtDate"></label>
+                <div class="">
+                    <div class=" d-flex align-items align-items-center">
+                        <i class="fa-solid fa-mobile-screen-button" style="margin-right:10px;"></i>
+                        <input asp-for="BirtDate" class="form-control" id="BirtDate" aria-describedby="BirtDateError" placeholder="BirtDate" style="max-width:20%;">
+                    </div>
+                    <span class="text-danger" asp-validation-for="BirtDate" style="margin-left:5%;"></span>
+                </div>
+                <label for="Gender" class="form-label" asp-for="Gender"></label>
+                <div class="">
+                    <div class=" d-flex align-items-center">
+                        <i class="fa-solid fa-mobile-screen-button" style="margin-right:10px;"></i>
+                        <select asp-for="Gender" asp-items="ViewBag.Genders" class="form-control" id="Gender" aria-describedby="GenderError" placeholder="Gender">
+                            <option value="">Select Gender</option>
+                        </select>
+                    </div>
+                    <span class="text-danger" asp-validation-for="Gender" style="margin-left:5%;"></span>
+                </div>
+                <label for="ProfileImage" class="form-label" asp-for="ProfileImage"></label>
+                <div class="">
+                    <div class=" d-flex align-items-center">
+                        <i class="fa-solid fa-mobile-screen-button" style="margin-right:10px;"></i>
+                        <input asp-for="ProfileImage" type="file" class="form-control" id="ProfileImage" aria-describedby="ProfileImageError" placeholder="ProfileImage">
+                    </div>
+                    <span class="text-danger" asp-validation-for="ProfileImage" style="margin-left:5%;"></span>
+                </div>
+                <div class="row">
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-arrow-right-to-bracket"></i> Update </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
