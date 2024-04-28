@@ -15,5 +15,10 @@ namespace AspNetCoreIdentityApp.Data.Context
         {
 
         }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+            base.OnModelCreating(builder);
+        }
     }
 }
