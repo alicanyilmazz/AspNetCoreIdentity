@@ -27,6 +27,8 @@ namespace AspNetCoreIdentityApp.Web.Areas.Authentication.ViewModels
 
         [DataType(DataType.Password)]
         [Compare(nameof(Password), ErrorMessage = "Password and password confirm do not match!")]
+        [MinLength(8, ErrorMessage = "Password must be at least 8 characters long!")]
+        [MaxLength(16, ErrorMessage = "Password can not be longer than 16 characters!")]
         [Required(ErrorMessage = "Password confirm can not be empty!")]
         [Display(Name = "Password Confirm")]
         public string? PasswordConfirm { get; set; }
