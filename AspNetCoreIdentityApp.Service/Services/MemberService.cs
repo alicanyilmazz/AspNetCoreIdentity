@@ -72,7 +72,7 @@ namespace AspNetCoreIdentityApp.Service.Services
             return (hasUser,IdentityResult.Success);
         }
 
-        public async Task<(IdentityResult result, string? token, string? userId)> ForgotUserPassword(string email)
+        public async Task<(IdentityResult result, string? token, string? userId)> ForgotUserPasswordAsync(string email)
         {
             var hasUser = await _userManager.FindByEmailAsync(email);
             if (hasUser is null)
@@ -83,7 +83,7 @@ namespace AspNetCoreIdentityApp.Service.Services
             return (result: IdentityResult.Success, token: resetToken, userId: hasUser.Id);
         }
 
-        public async Task<IdentityResult> ResetUserPassword(string userId, string token, string password)
+        public async Task<IdentityResult> ResetUserPasswordAsync(string userId, string token, string password)
         {
             var hasUser = await _userManager.FindByIdAsync(userId);
             if (hasUser is null)
@@ -91,6 +91,29 @@ namespace AspNetCoreIdentityApp.Service.Services
                 return IdentityResult.Failed(new IdentityError() { Code = "UserNotFound", Description = "No registered user was found with this email." });
             }
             return await _userManager.ResetPasswordAsync(hasUser, token, password);
+        }
+        public async Task<IdentityResult> ChangeUserPasswordAsync(string userName, string currentPassword,string newPassword)
+        {
+            var hasUser = await _userManager.FindByNameAsync(userName);
+            if (hasUser is null)
+            {
+                return IdentityResult.Failed(new IdentityError() { Code = "UserNotFound", Description = "No registered user was found with this email." });
+            }
+            var checkCurrentPassword = await _userManager.CheckPasswordAsync(hasUser, currentPassword);
+            if (!checkCurrentPassword)
+            {
+                return IdentityResult.Failed(new IdentityError() { Code = "CurrentPasswordWrong", Description = "Current password is wrong." });
+            }
+            var checkNewPassword = await _userManager.ChangePasswordAsync(hasUser, currentPassword,newPassword);
+            if (!checkNewPassword.Succeeded)
+            {
+                return checkNewPassword;
+            }
+
+            await _userManager.UpdateSecurityStampAsync(hasUser);
+            await _signInManager.SignOutAsync();
+            await _signInManager.PasswordSignInAsync(hasUser, newPassword, true, false);
+            return IdentityResult.Success;
         }
     }
 }
