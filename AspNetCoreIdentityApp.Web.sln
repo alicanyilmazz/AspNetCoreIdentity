@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34701.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCoreIdentityApp.Web", "AspNetCoreIdentityApp.Web\AspNetCoreIdentityApp.Web.csproj", "{03569184-C1F8-4695-B292-35E7BE46F2C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreIdentityApp.Web", "AspNetCoreIdentityApp.Web\AspNetCoreIdentityApp.Web.csproj", "{03569184-C1F8-4695-B292-35E7BE46F2C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCoreIdentityApp.Core", "AspNetCoreIdentityApp.Core\AspNetCoreIdentityApp.Core.csproj", "{2A0F5E15-B205-48D0-83E9-7502ADFD2B5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCoreIdentityApp.Data", "AspNetCoreIdentityApp.Data\AspNetCoreIdentityApp.Data.csproj", "{53839FA9-050B-4226-88DB-A8EC1CA2E538}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCoreIdentityApp.Service", "AspNetCoreIdentityApp.Service\AspNetCoreIdentityApp.Service.csproj", "{BF22DCAF-0D1A-4AFA-B1F2-12C5EA10F5BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCoreIdentityApp.Shared", "AspNetCoreIdentityApp.Shared\AspNetCoreIdentityApp.Shared.csproj", "{155F3FF8-49E4-4271-8B10-A0A04AA5BD7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +23,22 @@ Global
 		{03569184-C1F8-4695-B292-35E7BE46F2C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03569184-C1F8-4695-B292-35E7BE46F2C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03569184-C1F8-4695-B292-35E7BE46F2C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A0F5E15-B205-48D0-83E9-7502ADFD2B5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A0F5E15-B205-48D0-83E9-7502ADFD2B5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A0F5E15-B205-48D0-83E9-7502ADFD2B5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A0F5E15-B205-48D0-83E9-7502ADFD2B5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53839FA9-050B-4226-88DB-A8EC1CA2E538}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53839FA9-050B-4226-88DB-A8EC1CA2E538}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53839FA9-050B-4226-88DB-A8EC1CA2E538}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53839FA9-050B-4226-88DB-A8EC1CA2E538}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF22DCAF-0D1A-4AFA-B1F2-12C5EA10F5BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF22DCAF-0D1A-4AFA-B1F2-12C5EA10F5BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF22DCAF-0D1A-4AFA-B1F2-12C5EA10F5BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF22DCAF-0D1A-4AFA-B1F2-12C5EA10F5BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{155F3FF8-49E4-4271-8B10-A0A04AA5BD7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{155F3FF8-49E4-4271-8B10-A0A04AA5BD7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{155F3FF8-49E4-4271-8B10-A0A04AA5BD7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{155F3FF8-49E4-4271-8B10-A0A04AA5BD7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

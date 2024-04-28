@@ -1,0 +1,12 @@
+﻿@if (User.Identity.IsAuthenticated)
+{
+    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+        @User.Identity.Name
+    </button>
+}
+else
+{
+    <a class="btn btn-secondary my-2 my-sm-0" asp-area="Authentication" asp-controller="Home" asp-action="SignIn">
+        <i class="fa-solid fa-right-to-bracket"></i> Sign In
+    </a>
+}

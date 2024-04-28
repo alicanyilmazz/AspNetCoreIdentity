@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+<div class="container" style="margin-top:5%;">
+    <div class="tab-pane fade active show" id="home" role="tabpanel">
+        <p style="margin-top:5%;">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+        <div class="container" style="margin-top:5%;">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card border-danger mb-3" style="max-width: 20rem;">
+                        <div class="card-header">Todo</div>
+                        <div class="card-body">
+                            <h4 class="card-title">Study Solid Principles</h4>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-warning mb-3" style="max-width: 20rem;">
+                        <div class="card-header">In Progress</div>
+                        <div class="card-body">
+                            <h4 class="card-title">Study Data Structures</h4>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-success mb-3" style="max-width: 20rem;">
+                        <div class="card-header">Done</div>
+                        <div class="card-body">
+                            <h4 class="card-title">Prepare Letters</h4>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

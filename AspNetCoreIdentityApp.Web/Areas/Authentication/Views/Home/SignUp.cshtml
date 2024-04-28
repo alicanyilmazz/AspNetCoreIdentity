@@ -1,0 +1,81 @@
+﻿@{
+    ViewData["Title"] = "SignUp";
+    Layout = "~/Areas/Authentication/Views/Shared/_Layout.cshtml";
+}
+@model SignUpViewModel
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+
+<div class="container">
+    <div class="card" style="margin-top:5%;">
+        <h3 class="card-header">SignUp</h3>
+        <div class="card-body">
+            @if (@TempData["SuccessMessage"] is not null)
+            {
+                <div class="alert alert-dismissible alert-success">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <strong>Well done!</strong> @TempData["SuccessMessage"] <a href="#" class="alert-link">you can return home page.</a>.
+                </div>
+            }
+
+            <div asp-validation-summary=ModelOnly class="alert alert-dismissible alert-danger">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            <form asp-controller="Home" asp-action="SignUp" method="post">
+                <label for="UserName" class="form-label" asp-for="UserName"></label>
+                <div class="mb-1">
+                    <div class="d-flex align-items-center">
+                        <i class="fa-regular fa-user" style="margin-right:10px;"> </i>
+                        <input asp-for="UserName" class="form-control" id="UserName" aria-describedby="UserNameError" placeholder="User Name">
+                    </div>
+                    <span class="text-danger" asp-validation-for="UserName" style="margin-left:5%;"></span>
+                </div>
+                <label for="Email" class="form-label" asp-for="Email"></label>
+                <div class="mb-1 ">
+                    <div class="d-flex align-items-center">
+                        <i class="fa-regular fa-envelope" style="margin-right:10px;"></i>
+                        <input asp-for="Email" class="form-control" id="Email" aria-describedby="EmailError" placeholder="Email">
+                    </div>
+                    <span class="text-danger" asp-validation-for="Email" style="margin-left:5%;"></span>
+                </div>
+                <label for="Phone" class="form-label" asp-for="Phone"></label>
+                <div class="mb-1">
+                    <div class=" d-flex align-items-center">
+                        <i class="fa-solid fa-mobile-screen-button" style="margin-right:10px;"></i>
+                        <input asp-for="Phone" class="form-control" id="Phone" aria-describedby="PhoneError" placeholder="Phone Number">
+                    </div>
+                    <span class="text-danger" asp-validation-for="Phone" style="margin-left:5%;"></span>
+                </div>
+                <label asp-for="Password" for="Password" class="form-label"></label>
+                <div class="mb-1 ">
+                    <div class="d-flex align-items-center">
+                        <i class="fa-solid fa-lock" style="margin-right:10px;"></i>
+                        <input asp-for="Password" class="form-control" id="Password" placeholder="Password">
+                    </div>
+                    <span class="text-danger" asp-validation-for="Password" style="margin-left:5%;"></span>
+                </div>
+                <label asp-for="PasswordConfirm" for="PasswordConfirm" class="form-label"></label>
+                <div class="mb-1">
+                    <div class="d-flex align-items-center">
+                        <i class="fa-solid fa-lock" style="margin-right:10px;"></i>
+                        <input asp-for="PasswordConfirm" class="form-control" id="PasswordConfirm" placeholder="Password Confirm">
+                    </div>
+
+                    <span class="text-danger" asp-validation-for="PasswordConfirm" style="margin-left:5%;"></span>
+                </div>
+                <div class="row">
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-arrow-right-to-bracket"></i> Sign Up </button>
+               </div>
+            </form>
+        </div>
+        <div class="card-footer text-muted">
+            <div class="d-flex justify-content-center">
+                <div>
+                    <a asp-area="Authentication" asp-controller="Home" asp-action="SignIn">Already have an account? Sign In</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
