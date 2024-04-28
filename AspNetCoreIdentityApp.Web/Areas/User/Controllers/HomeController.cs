@@ -1,10 +1,12 @@
 ﻿using AspNetCoreIdentityApp.Core.Entities;
+using AspNetCoreIdentityApp.Core.Entities.Enums;
 using AspNetCoreIdentityApp.Core.Extensions.Identity.ModelState;
 using AspNetCoreIdentityApp.Core.Services;
 using AspNetCoreIdentityApp.Web.Areas.User.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AspNetCoreIdentityApp.Web.Areas.User.Controllers
 {
@@ -59,6 +61,34 @@ namespace AspNetCoreIdentityApp.Web.Areas.User.Controllers
                 return View();
             }
             TempData["SuccessMessage"] = $"Your password changed successfully.";
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> UserInformationChange()
+        {
+            ViewBag.Genders = new SelectList(Enum.GetNames(typeof(Gender)));
+            (AppUser currentUser , IdentityResult result) = await _memberService.GetUserByNameAsync(User.Identity!.Name!);
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelStateErrors(result.Errors.Select(x => x.Description).ToList());
+                return View();
+            }
+            var user = new UserInformationChangeViewModel
+            {
+                UserName = currentUser!.UserName,
+                Email = currentUser.Email,
+                Phone = currentUser.PhoneNumber,
+                City = currentUser.City,
+                BirtDate = currentUser.BirtDate,
+                Gender = currentUser.Gender
+            };
+            return View(user);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UserInformationChange(UserInformationChangeViewModel request)
+        {
             return View();
         }
     }
