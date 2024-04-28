@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+}
+
+@model UserViewModel
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+<div class="container">
+    <div style="margin-top:5%;">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Profile Informations</h4>
+                <h6 class="card-subtitle mb-2 text-muted">Authentication Information</h6>
+                <p class="card-text">
+                    <i class="fa-regular fa-user"></i> <span class="text-muted"> User Name : @Model.UserName</span>
+                </p>
+                <p class="card-text">
+                    <i class="fa-regular fa-envelope"></i> <span class="text-muted">Email : @Model.Email</span>
+                </p>
+                <p class="card-text">
+                    <i class="fa-solid fa-mobile-screen"></i> <span class="text-muted">Phone Number : @Model.PhoneNumber</span>
+                </p>            
+            </div>
+        </div>
+    </div>
+</div>
