@@ -1,6 +1,7 @@
 ﻿using AspNetCoreIdentityApp.Core.Entities;
 using AspNetCoreIdentityApp.Core.Services;
 using AspNetCoreIdentityApp.Core.ViewModels.Areas.Admin;
+using AspNetCoreIdentityApp.Core.ViewModels.Areas.User;
 using AspNetCoreIdentityApp.Service.DtoMappers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +18,7 @@ namespace AspNetCoreIdentityApp.Service.Services
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
 
-     
+
         public MemberService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _userManager = userManager;
@@ -69,7 +70,7 @@ namespace AspNetCoreIdentityApp.Service.Services
             {
                 return (hasUser, IdentityResult.Failed(new IdentityError() { Code = "UserNotFound", Description = "No registered user was found with this user name." }));
             }
-            return (hasUser,IdentityResult.Success);
+            return (hasUser, IdentityResult.Success);
         }
 
         public async Task<(IdentityResult result, string? token, string? userId)> ForgotUserPasswordAsync(string email)
@@ -92,7 +93,7 @@ namespace AspNetCoreIdentityApp.Service.Services
             }
             return await _userManager.ResetPasswordAsync(hasUser, token, password);
         }
-        public async Task<IdentityResult> ChangeUserPasswordAsync(string userName, string currentPassword,string newPassword)
+        public async Task<IdentityResult> ChangeUserPasswordAsync(string userName, string currentPassword, string newPassword)
         {
             var hasUser = await _userManager.FindByNameAsync(userName);
             if (hasUser is null)
@@ -104,7 +105,7 @@ namespace AspNetCoreIdentityApp.Service.Services
             {
                 return IdentityResult.Failed(new IdentityError() { Code = "CurrentPasswordWrong", Description = "Current password is wrong." });
             }
-            var checkNewPassword = await _userManager.ChangePasswordAsync(hasUser, currentPassword,newPassword);
+            var checkNewPassword = await _userManager.ChangePasswordAsync(hasUser, currentPassword, newPassword);
             if (!checkNewPassword.Succeeded)
             {
                 return checkNewPassword;
@@ -114,6 +115,35 @@ namespace AspNetCoreIdentityApp.Service.Services
             await _signInManager.SignOutAsync();
             await _signInManager.PasswordSignInAsync(hasUser, newPassword, true, false);
             return IdentityResult.Success;
+        }
+
+        public async Task<IdentityResult> UpdateUserInformationAsync(UserProfileInformationViewModel viewModel, string currentUserName)
+        {
+            AppUser? hasUser = await _userManager.FindByNameAsync(currentUserName);
+            if (hasUser is null)
+            {
+                return IdentityResult.Failed(new IdentityError() { Code = "UserNotFound", Description = "No registered user was found with this user name." });
+            }
+            hasUser.UserName = viewModel.UserName;
+            hasUser.Email = viewModel.Email;
+            hasUser.PhoneNumber = viewModel.Phone;
+            hasUser.City = viewModel.City;
+            hasUser.BirtDate = viewModel.BirtDate;
+            hasUser.Gender = viewModel.Gender;
+            hasUser.Picture = viewModel.ProfileImage;
+            var updateUserInformation = await _userManager.UpdateAsync(hasUser);
+            if (!updateUserInformation.Succeeded)
+            {
+                return updateUserInformation;
+            }
+            var updateSecurityStamp = await _userManager.UpdateSecurityStampAsync(hasUser);
+            if (!updateSecurityStamp.Succeeded)
+            {
+                return updateSecurityStamp;
+            }
+            await _signInManager.SignOutAsync();
+            await _signInManager.SignInAsync(hasUser, true);
+            return updateUserInformation;
         }
     }
 }
