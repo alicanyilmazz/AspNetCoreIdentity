@@ -97,7 +97,7 @@ namespace AspNetCoreIdentityApp.Web.Areas.Authentication.Controllers
         [HttpPost]
         public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel request)
         {
-            var (result, token, id) = await _memberService.ForgotUserPassword(request!.Email!);
+            var (result, token, id) = await _memberService.ForgotUserPasswordAsync(request!.Email!);
             if (!result.Succeeded)
             {
                 ModelState.AddModelStateErrors(result.Errors.Select(x => x.Description).ToList());
@@ -131,7 +131,7 @@ namespace AspNetCoreIdentityApp.Web.Areas.Authentication.Controllers
                 throw new Exception("Opps an error occured.");
             }
 
-            var result = await _memberService.ResetUserPassword(userId.ToString()!,token.ToString()!,request.Password!);
+            var result = await _memberService.ResetUserPasswordAsync(userId.ToString()!,token.ToString()!,request.Password!);
 
             if (!result.Succeeded)
             {
