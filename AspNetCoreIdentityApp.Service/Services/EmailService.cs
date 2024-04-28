@@ -1,12 +1,7 @@
 ﻿using AspNetCoreIdentityApp.Core.Services;
 using AspNetCoreIdentityApp.Core.ViewModels.Areas.Authentication;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AspNetCoreIdentityApp.Service.Services
 {
