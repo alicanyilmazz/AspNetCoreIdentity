@@ -16,7 +16,7 @@ namespace AspNetCoreIdentityApp.Data.Configurations.EntityConfigurations
             builder.Property(u => u.City).HasMaxLength(100).IsRequired(false);
             builder.Property(u => u.Picture).IsRequired(false);
             builder.Property(u => u.BirtDate).HasColumnType("date").IsRequired(false);
-            builder.Property(u => u.Gender).IsRequired(false);
+            builder.Property(u => u.Gender);
         }
     }
 }
