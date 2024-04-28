@@ -1,5 +1,6 @@
 ﻿using AspNetCoreIdentityApp.Core.Entities;
 using AspNetCoreIdentityApp.Core.ViewModels.Areas.Admin;
+using AspNetCoreIdentityApp.Core.ViewModels.Areas.User;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -20,5 +21,6 @@ namespace AspNetCoreIdentityApp.Core.Services
         public Task<IdentityResult> ResetUserPasswordAsync(string userId, string token, string password);
         public Task<IdentityResult> ChangeUserPasswordAsync(string userName, string currentPassword, string newPassword);
         public Task<(AppUser? user, IdentityResult result)> GetUserByNameAsync(string userName);
+        public Task<IdentityResult> UpdateUserInformationAsync(UserProfileInformationViewModel viewModel, string currentUserName);
     }
 }
