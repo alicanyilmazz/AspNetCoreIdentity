@@ -1,4 +1,5 @@
 ﻿using AspNetCoreIdentityApp.Core.Entities;
+using AspNetCoreIdentityApp.Core.Entities.Services.MemberService;
 using AspNetCoreIdentityApp.Core.ViewModels.Areas.Admin;
 using AspNetCoreIdentityApp.Core.ViewModels.Areas.User;
 using Microsoft.AspNetCore.Identity;
@@ -22,5 +23,11 @@ namespace AspNetCoreIdentityApp.Core.Services
         public Task<IdentityResult> ChangeUserPasswordAsync(string userName, string currentPassword, string newPassword);
         public Task<(AppUser? user, IdentityResult result)> GetUserByNameAsync(string userName);
         public Task<IdentityResult> UpdateUserInformationAsync(UserProfileInformationViewModel viewModel, string currentUserName);
+        public Task<IdentityResult> CreateRoleAsync(string roleName);
+        public Task<IEnumerable<AppRole>> GetRolesAsync();
+        public Task<(IdentityResult, AppRole?)> GetRoleAsync(string id);
+        public Task<IdentityResult> UpdateRoleAsync(string id, string name);
+        public Task<(IdentityResult, AppRole?)> UpdateRoleAsync(RoleUpdate roleUpdate);
+        public Task<IdentityResult> DeleteRoleAsync(string id);
     }
 }
