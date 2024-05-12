@@ -1,0 +1,62 @@
+﻿@model AspNetCoreIdentityApp.Web.Areas.Admin.ViewModels.RoleCreateViewModel
+
+@{
+    ViewData["Title"] = "RoleCreate";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+<div class="container">
+    <div class="card" style="margin-top:5%;">
+        <div class="d-flex justify-content-between">
+            <h4 class="card-header">Role Create</h4>
+            <a class="btn btn-primary" asp-area="Admin" asp-controller="Roles" asp-action="Index"><i class="fa-solid fa-arrow-left"></i></a>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    @if (@TempData["SuccessMessage"] is not null)
+                    {
+                        <div class="alert alert-dismissible alert-success">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            <strong>Well done!</strong> @TempData["SuccessMessage"].
+                        </div>
+                    }
+                    <div asp-validation-summary=ModelOnly class="alert alert-dismissible alert-danger">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                    <form asp-area="Admin" asp-controller="Roles" asp-action="Create" method="post">
+                        <label for="Name" class="form-label" asp-for="Name"></label>
+                        <div class="mb-2">
+                            <div class="d-flex align-items-center">
+                                @*   <i class="fa-solid fa-pencil" style="margin-right:10px;"></i> *@
+                                <input asp-for="Name" class="form-control" for="Name" aria-describedby="NameError" placeholder="Name">
+                            </div>
+                            <span class="text-danger" asp-validation-for="Name" style="margin-left:10%;"></span>
+                        </div>
+                        <div class="row">
+                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-arrow-right-to-bracket"></i> Add </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <div class="row">
+                            <p class="text-primary-emphasis"><i class="fa-solid fa-circle-exclamation"></i> Please exercise caution and obtain managerial approval when defining new roles.</p>
+                            <p class="text-secondary-emphasis"><i class="fa-solid fa-circle-exclamation"></i> It's essential to obtain managerial approval before defining roles.</p>
+                            <p class="text-danger-emphasis"><i class="fa-solid fa-circle-exclamation"></i> Care should be taken to avoid defining unnecessary roles.</p>
+                            <p class="text-dark-emphasis"><i class="fa-solid fa-circle-exclamation"></i> Avoid defining a role that encompasses all permissions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
