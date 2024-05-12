@@ -1,29 +1,32 @@
 ﻿@model List<UserViewModel>
 @{
-    ViewData["Title"] = "Users";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+
 
 <h1>Users</h1>
 
-<table id="userlist" class="table table-hover">
-    <thead>
-        <tr class="table-danger">
-            <th scope="col">Id</th>
-            <th scope="col">User Name</th>
-            <th scope="col">Email</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var user in Model)
-        {
-            <tr class="table-success">
-                <td>@user.Id</td>
-                <td>@user.UserName</td>
-                <td>@user.Email</td>
+<div class="container">
+    <table id="userlist" class="table table-hover">
+        <thead>
+            <tr class="table-danger">
+                <th scope="col">Id</th>
+                <th scope="col">User Name</th>
+                <th scope="col">Email</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr class="table-success">
+                    <td>@user.Id</td>
+                    <td>@user.UserName</td>
+                    <td>@user.Email</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -46,3 +49,4 @@
         });
     });
 </script>
+
