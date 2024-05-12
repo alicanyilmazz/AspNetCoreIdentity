@@ -1,4 +1,5 @@
 ﻿using AspNetCoreIdentityApp.Core.Entities;
+using AspNetCoreIdentityApp.Core.Entities.Services.MemberService;
 using AspNetCoreIdentityApp.Core.Services;
 using AspNetCoreIdentityApp.Core.ViewModels.Areas.Admin;
 using AspNetCoreIdentityApp.Core.ViewModels.Areas.User;
@@ -17,12 +18,13 @@ namespace AspNetCoreIdentityApp.Service.Services
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly RoleManager<AppRole> _roleManager;
 
-
-        public MemberService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public MemberService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<AppRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
         }
 
         public async Task<IdentityResult> SignUpAsync(AppUser user, string password)
@@ -144,6 +146,61 @@ namespace AspNetCoreIdentityApp.Service.Services
             await _signInManager.SignOutAsync();
             await _signInManager.SignInAsync(hasUser, true);
             return updateUserInformation;
+        }
+        public async Task<IdentityResult> CreateRoleAsync(string roleName)
+        {
+            return await _roleManager.CreateAsync(new AppRole() { Name = roleName });
+        }
+        public async Task<IdentityResult> UpdateRoleAsync(string id,string name)
+        {
+            var roleToUpdate = await _roleManager.FindByIdAsync(id);
+            if (roleToUpdate is null)
+            {
+                return IdentityResult.Failed(new IdentityError() { Code = "RoleNotFound", Description = "No registered role was found with this id." });
+            }
+            roleToUpdate.Name = name;
+            return await _roleManager.UpdateAsync(roleToUpdate);
+        }
+        public async Task<(IdentityResult,AppRole?)> UpdateRoleAsync(RoleUpdate roleUpdate)
+        {
+            var roleToUpdate = await _roleManager.FindByIdAsync(roleUpdate.Id);
+            if (roleToUpdate is null)
+            {
+                return (IdentityResult.Failed(new IdentityError() { Code = "RoleNotFound", Description = "No registered role was found with this id." }),null);
+            }
+            roleToUpdate.Name = roleUpdate.Name;
+            return (await _roleManager.UpdateAsync(roleToUpdate), roleToUpdate);
+        }
+        public async Task<IdentityResult> DeleteRoleAsync(string id)
+        {
+            var roleToUpdate = await _roleManager.FindByIdAsync(id);
+            if (roleToUpdate is null)
+            {
+                return IdentityResult.Failed(new IdentityError() { Code = "RoleNotFound", Description = "No registered role was found with this id." });
+            }
+            return await _roleManager.DeleteAsync(roleToUpdate);
+        }
+        public async Task<(IdentityResult, AppRole?)> GetRoleAsync(string id)
+        {
+            var role = await _roleManager.FindByIdAsync(id);
+            if (role is null)
+            {
+                return (IdentityResult.Failed(new IdentityError() { Code = "RoleNotFound", Description = "No registered role was found with this id." }),null);
+            }
+            return (IdentityResult.Success, role);
+        }
+        public async Task<IEnumerable<AppRole>> GetRolesAsync()
+        {
+            return await _roleManager.Roles.ToListAsync();
+        }
+        public async Task<IdentityResult> DeleteUserAsync(string userName)
+        {
+            AppUser? hasUser = await _userManager.FindByNameAsync(userName);
+            if (hasUser is null)
+            {
+                return IdentityResult.Failed(new IdentityError() { Code = "UserNotFound", Description = "No registered user was found with this user name." });
+            }
+            return await _userManager.DeleteAsync(hasUser);
         }
     }
 }
