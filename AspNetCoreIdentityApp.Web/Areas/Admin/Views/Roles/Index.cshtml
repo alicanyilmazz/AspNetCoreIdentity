@@ -1,0 +1,87 @@
+﻿@model IEnumerable<AspNetCoreIdentityApp.Web.Areas.Admin.ViewModels.RoleViewModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script>
+        function deleteRole(roleId) {
+            fetch('@Url.Action("Delete", "Roles", new { area = "Admin" })', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: 'id=' + roleId
+            }).then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    return response.json().then(errorData => {
+                        console.log(errorData.message);
+                        throw new Error(errorData.errorDetail);
+                    });
+                }
+            }).then(data => {
+                console.log(data.message); 
+                var deletedRoleElement = document.getElementById('rolecomponent_' + roleId);
+                if (deletedRoleElement) {
+                    deletedRoleElement.remove();
+                    $('#liveToast .toast-body').text(data.message);
+                    toastFunction();
+                }
+            }).catch(error => {
+                $('#liveToast .toast-body').text(error.message);
+                toastFunction();        
+            });
+        }
+     
+        function toastFunction() {
+           
+            const toastLiveExample = document.getElementById('liveToast')
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+            toastBootstrap.show();
+        }
+    </script>
+}
+
+<div class="container" id="asd">
+    <div class="card" style="margin-top:5%;">
+        <div class="d-flex justify-content-between">
+            <h5 class="card-header"><strong>Roles</strong></h5>
+            <a asp-controller="Roles" asp-action="Create" asp-area="Admin" class="btn btn-primary">Create</a>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                @foreach (var role in Model)
+                {
+                    <div class="col-md-4" id="rolecomponent_@role.Id">
+                        <div class="alert alert-primary">
+                            <div class="d-flex justify-content-between">
+                                <strong style="padding:4%">@role.Name</strong>
+                                <div>
+                                    <a asp-controller="Roles" asp-action="Update" asp-area="Admin" asp-route-id="@role.Id" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i></a>
+                                    @*   <a asp-route-id="@role.Id" data-role-id="@role.Id"  onclick="deleteRole('@role.Id')" class="btn btn-warning" id="deleterole"><i class="fa-solid fa-trash"></i></a> *@
+                                    <button type="button" onclick="deleteRole('@role.Id')" class="btn btn-warning"><i class="fa-solid fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <img src="~/images/updaterole.png" class="rounded me-2" alt="..." width="30px" height="30px">
+            <strong class="me-auto">Information</strong>
+            <small>1 mins ago</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+        </div>
+    </div>
+</div>
